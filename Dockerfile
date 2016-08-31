@@ -28,13 +28,12 @@ RUN npm install --production
   # --name master --displayName Master --email admin --password password
 
 # upgrade the AuthoringTool and or Framework
-#RUN node upgrade --Y/n Y
+# RUN node upgrade --Y/n Y
 
 # guest: 5000, host: 5000
 # guest: 5858, host: 5858
 # guest: 27017, host: 27027
 
-# cd /vagrant/
-# pm2 start processes.json
-
 EXPOSE 5000
+
+CMD pm2 start --no-daemon processes.json

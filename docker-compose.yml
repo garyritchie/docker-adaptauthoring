@@ -1,0 +1,21 @@
+version: '2'
+
+volumes:
+  adaptdata:
+
+services:
+  db:
+    container_name: adaptdb
+    image: mongo
+  authoring:
+    volumes:
+      - adaptdata:/adapt_authoring
+    container_name: adaptauthoring
+    build: .
+    command: pm2 start --no-daemon processes.json
+    links:
+      - db
+    # depends_on:
+    #   - db
+    ports:
+      - "5000:5000"
