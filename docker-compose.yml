@@ -2,11 +2,16 @@ version: '2'
 
 volumes:
   adaptdata:
+  adaptdb:
 
 services:
   db:
     container_name: adaptdb
     image: mongo
+    volumes:
+      - adaptdb:/data/db
+    ports:
+      - 27017:27017
   authoring:
     volumes:
       - adaptdata:/adapt_authoring
