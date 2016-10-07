@@ -56,17 +56,16 @@ docker volume rm dockeradaptauthoring_adaptdata
 
 [database and course content]
 
-Getting Started - docker run
+Getting Started - Using `docker run ...`
 ---------------------------------
 
-Setup
------------
+### Setup
 
-### Volumes
+#### Volumes
 
 `docker volume create --name adaptdata`
 
-### Services
+#### Services
 
 `docker run -d --name adaptdb -v adaptdb:/data/db mongo`
 
@@ -93,8 +92,15 @@ Upgrade the AuthoringTool and or Framework:
 docker run -it --rm -P --link adaptdb --name adaptauthoring -v adaptdata:/adapt_authoring garyritchie/docker-adaptauthoring bash -c 'node upgrade --Y/n Y'
 ```
 
-Run
--------
+After a bit you should see:
+
+`Great work! Your Adapt authoring tool is now updated.`
+
+At this point the "adaptauthoring" container has been run twice to configure and update the Adapt Authoring tool. Each time the _container_ was destroyed -- the data is retained within the docker volume created in an earlier step.
+
+### Run
+
+Once the "Setup" steps are complete, do:
 
 ```bash
 docker run -d  -p 5000:5000 --link adaptdb --name adaptauthoring garyritchie/docker-adaptauthoring bash -c 'pm2 start --no-daemon processes.json'
