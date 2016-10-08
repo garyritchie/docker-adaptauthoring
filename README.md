@@ -56,23 +56,18 @@ docker volume rm dockeradaptauthoring_adaptdata
 
 [database and course content]
 
+
 Getting Started - Using `docker run ...`
----------------------------------
+--------------------------------------------
 
 ### Setup
-
-#### Volumes
-
-`docker volume create --name adaptdata`
-
-#### Services
 
 `docker run -d --name adaptdb -v adaptdb:/data/db mongo`
 
 Adjust values such as `--email` and `--password` as desired:
 
 ```bash
-docker run -it --rm -P --link adaptdb --name adaptauthoring -v adaptdata:/adapt_authoring garyritchie/docker-adaptauthoring bash -c 'node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb --dbName adapt-tenant-master --dbPort 27017 --dataRoot data --sessionSecret your-session-secret --useffmpeg Y --smtpService dummy --smtpUsername smtpUser --smtpPassword smtpPass --fromAddress you@example.com --name master --displayName Master --email admin --password password'
+docker run -it -p 5000:5000 --link adaptdb --name adaptauthoring -v adaptdata:/adapt_authoring garyritchie/docker-adaptauthoring bash -c 'node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb --dbName adapt-tenant-master --dbPort 27017 --dataRoot data --sessionSecret your-session-secret --useffmpeg Y --smtpService dummy --smtpUsername smtpUser --smtpPassword smtpPass --fromAddress you@example.com --name master --displayName Master --email admin --password password'
 ```
 
 After a while the container should quit and you should see the following message"
@@ -86,22 +81,30 @@ To restart your instance run the command 'pm2 restart all'
 Bye!
 ```
 
-Upgrade the AuthoringTool and or Framework:
-
-```bash
-docker run -it --rm -P --link adaptdb --name adaptauthoring -v adaptdata:/adapt_authoring garyritchie/docker-adaptauthoring bash -c 'node upgrade --Y/n Y'
-```
-
-After a bit you should see:
-
-`Great work! Your Adapt authoring tool is now updated.`
-
-At this point the "adaptauthoring" container has been run twice to configure and update the Adapt Authoring tool. Each time the _container_ was destroyed -- the data is retained within the docker volume created in an earlier step.
 
 ### Run
 
 Once the "Setup" steps are complete, do:
 
+`docker restart adaptauthoring`
+
+Adapt authoring tool should now be available at http://localhost:5000/
+
+
+### Upgrade
+
+*Please Note:* Upgrading has had mixed results in recent tests.
+
+Upgrade the AuthoringTool and or Framework (run in a shell):
+
 ```bash
-docker run -d  -p 5000:5000 --link adaptdb --name adaptauthoring garyritchie/docker-adaptauthoring bash -c 'pm2 start --no-daemon processes.json'
+docker exec -it adaptauthoring bash -c 'node upgrade --Y/n Y'
 ```
+
+`node upgrade` has been stalling... `docker run -it -p 5000:5000 --link adaptdb --name adaptauthoring -v adaptdata:/adapt_authoring garyritchie/docker-adaptauthoring bash -c 'node upgrade --Y/n Y'`
+
+After a bit you should see:
+
+`Great work! Your Adapt authoring tool is now updated.`
+
+At this point the "adaptauthoring" container has been run twice to configure and update the Adapt Authoring tool.
