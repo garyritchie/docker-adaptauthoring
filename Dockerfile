@@ -17,7 +17,7 @@ RUN npm install -g pm2 \
   && npm install -g adapt-cli
 
 RUN cd / \
-  && git clone --branch ${AAT_VER} https://github.com/adaptlearning/adapt_authoring.git
+  && git clone --branch v${AAT_VER} https://github.com/adaptlearning/adapt_authoring.git
 
 WORKDIR /adapt_authoring
 
