@@ -1,7 +1,9 @@
 README.md
 =================
 
-Authoring SCORM-compatible training using the [Adapt Authoring](https://github.com/adaptlearning/adapt_authoring) tool.
+Authoring SCORM-compatible training using the [Adapt Authoring](https://github.com/adaptlearning/adapt_authoring) tool at http://localhost:5000.
+
+Login credentials are set from a .env file (See _Config_ section).
 
 Getting Started
 ---------------------

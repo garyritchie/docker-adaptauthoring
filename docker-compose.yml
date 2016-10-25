@@ -10,8 +10,8 @@ services:
     image: mongo
     volumes:
       - adaptdb:/data/db
-    ports:
-      - 27017:27017
+    # ports:
+    #   - 27017:27017
   authoring:
     volumes:
       - adaptdata:/adapt_authoring
