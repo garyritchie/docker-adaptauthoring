@@ -77,3 +77,9 @@ Create local archives of both the adapt_authoring folder and database:
 ```
 docker run -it -w /backup -v dockeradaptauthoring_adaptdb:/adaptdb -v $(pwd)/backup:/backup dockeradaptauthoring_authoring bash -c "tar -czvf adaptdata_`date +"%Y-%m-%d_%H-%M-%S"`.tar.gz /adapt_authoring && tar -czvf adaptdb_`date +"%Y-%m-%d_%H-%M-%S"`.tar.gz /adaptdb"
 ```
+
+More specific?...
+```
+/adapt_authoring/data/master/assets
+/adapt_authoring/temp
+```
