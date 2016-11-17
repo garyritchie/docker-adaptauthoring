@@ -14,7 +14,7 @@ services:
       - 27017:27017
   authoring:
     container_name: adaptauthoring
-    image: garyritchie/docker-adaptauthoring
+    image: garyritchie/docker-adaptauthoring:0.2.2
     volumes:
       - adaptdata:/adapt_authoring
     # build: .
