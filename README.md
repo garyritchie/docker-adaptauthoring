@@ -38,7 +38,7 @@ Subsequent runnings: `docker-compose up -d`.
 
 ### Windows Setup
 
-Docker's `docker-compose` command on Windows isn't fully supported. Here's an alternate method for updating the _adaptauthoring_ container:
+Docker's `docker-compose` _interactive mode_ command on Windows isn't fully supported. Here's an alternate method for updating the _adaptauthoring_ container:
 
 `docker exec -it` into the running _adaptauthoring_ container, then
 
