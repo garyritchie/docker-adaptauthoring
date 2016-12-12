@@ -1,10 +1,14 @@
 FROM node:4-wheezy
 
+ENV AAT_VER=0.2.2
+
+MAINTAINER Gary Ritchie <gary@garyritchie.com>
+
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libssl-dev \
-    git \
     ffmpeg \
+    git \
+    libssl-dev \
   && rm -rf /var/lib/apt/lists/*
 
 # global npm dependencies
@@ -13,7 +17,7 @@ RUN npm install -g pm2 \
   && npm install -g adapt-cli
 
 RUN cd / \
-  && git clone https://github.com/adaptlearning/adapt_authoring.git
+  && git clone --branch v${AAT_VER} https://github.com/adaptlearning/adapt_authoring.git
 
 WORKDIR /adapt_authoring
 

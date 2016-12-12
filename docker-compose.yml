@@ -13,10 +13,11 @@ services:
     # ports:
     #   - 27017:27017
   authoring:
+    container_name: adaptauthoring
+    image: garyritchie/docker-adaptauthoring:0.2.2
     volumes:
       - adaptdata:/adapt_authoring
-    container_name: adaptauthoring
-    build: .
+    # build: .
     command: pm2 start --no-daemon processes.json
     links:
       - db
