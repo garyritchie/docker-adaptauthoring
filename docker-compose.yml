@@ -10,18 +10,13 @@ services:
     image: mongo
     volumes:
       - adaptdb:/data/db
-    # ports:
-    #   - 27017:27017
   authoring:
     container_name: adaptauthoring
     build: .
     image: garyritchie/docker-adaptauthoring:0.2.2
     volumes:
       - adaptdata:/adapt_authoring
-    # command: pm2 start --no-daemon processes.json
     links:
       - db
-    # depends_on:
-    #   - db
     ports:
-      - "5000:5000"
+      - "${SERVER_PORT}:${SERVER_PORT}"

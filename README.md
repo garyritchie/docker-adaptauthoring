@@ -44,20 +44,6 @@ Docker's `docker-compose` command on Windows isn't fully supported. Here's an al
 docker run --name adapt-setup --rm --env-file .env -v dockeradaptauthoring_adaptdata:/adapt_authoring --link adaptdb --net dockeradaptauthoring_default garyritchie/docker-adaptauthoring:0.2.2 bash -c "./install.sh"
 ```
 
-or
-
-`docker exec -it` into the running _adaptauthoring_ container, then
-
-```bash
-export ADMIN_EMAIL=admin
-
-export ADMIN_PASSWORD=password
-
-node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb --dbName adapt-tenant-master --dbPort 27017 --dataRoot data --sessionSecret your-session-secret --useffmpeg Y --smtpService dummy --smtpUsername smtpUser --smtpPassword smtpPass --fromAddress you@example.com --name master --displayName Master --email ${ADMIN_EMAIL} --password ${ADMIN_PASSWORD}
-```
-
-Exit and then restart the container.
-
 ### Clean Up
 
 #### To Remove Containers

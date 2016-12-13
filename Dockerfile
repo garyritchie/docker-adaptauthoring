@@ -5,11 +5,12 @@ MAINTAINER Gary Ritchie <gary@garyritchie.com>
 ## Adapt Authoring release
 ENV AAT_VER=v0.2.2
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    ffmpeg \
-    git \
-    libssl-dev \
+RUN export DEBIAN_FRONTEND='noninteractive' && \
+  apt-get update -qq && apt-get install -qqy \
+  build-essential \
+  ffmpeg \
+  git \
+  libssl-dev \
   && rm -rf /var/lib/apt/lists/*
 
 # global npm dependencies
@@ -27,24 +28,6 @@ RUN npm install --production
 ## Currently have to run this within container so we can link to running mongodb container...
 COPY install.sh install.sh
 RUN chmod u+x install.sh
-## docker run -it -P --link adaptdb --name adapt adaptframework bash
-# RUN node install --install Y \
-#   --serverPort 5000 \
-#   --serverName localhost \
-#   --dbHost adaptdb \
-#   --dbName adapt-tenant-master \
-#   --dbPort 27017 \
-#   --dataRoot data \
-#   --sessionSecret your-session-secret \
-#   --useffmpeg Y \
-#   --smtpService dummy \
-#   --smtpUsername smtpUser \
-#   --smtpPassword smtpPass \
-#   --fromAddress you@example.com \
-#   --name master \
-#   --displayName Master \
-#   --email ${ADMIN_EMAIL} \
-#   --password ${ADMIN_PASSWORD}
 
 # upgrade the AuthoringTool and or Framework
 # RUN node upgrade --Y/n Y
