@@ -23,13 +23,13 @@ This is read during "setup."
 
 Do this once:
 
-```
+```bash
 docker-compose up -d
 ```
 
 If you're using Windows skip to _Windows Setup_, otherwise wait for a moment, then
 
-```
+```bash
 docker-compose -f docker-compose.setup.yml run --rm setup
 
 ```
@@ -39,6 +39,12 @@ Subsequent runnings: `docker-compose up -d`.
 ### Windows Setup
 
 Docker's `docker-compose` command on Windows isn't fully supported. Here's an alternate method for updating the _adaptauthoring_ container:
+
+```bash
+docker run --name adapt-setup --rm --env-file .env -v dockeradaptauthoring_adaptdata:/adapt_authoring --link adaptdb --net dockeradaptauthoring_default garyritchie/docker-adaptauthoring:0.2.2 bash -c "./install.sh"
+```
+
+or
 
 `docker exec -it` into the running _adaptauthoring_ container, then
 
@@ -54,20 +60,21 @@ Exit and then restart the container.
 
 ### Clean Up
 
-#### To remove containers
+#### To Remove Containers
 
-```
+```bash
 docker-compose down
 ```
 
-#### To remove data (courses)
+#### To Remove Data
 
-This will delete your hard work.
+This will delete the Docker volumes that contain files and the database for the courses as well as the Docker image for Adapt Authoring.
 
+```bash
+docker-compose down -v --rmi local
 ```
-docker volume rm dockeradaptauthoring_adaptdb
-docker volume rm dockeradaptauthoring_adaptdata
-```
+
+Changing `--rmi local` to `--rmi all` will also remove the mongo Docker image.
 
 ### Backup
 

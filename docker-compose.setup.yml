@@ -7,9 +7,10 @@ volumes:
 
 services:
   setup:
-    # build: .
-    image: garyritchie/docker-adaptauthoring:0.2.2
     container_name: adaptauthoring
+    env_file: .env
+    build: .
+    image: garyritchie/docker-adaptauthoring:0.2.2
     # extends:
     #   file: docker-compose.yml
     #   service: authoring
@@ -19,7 +20,7 @@ services:
       - adaptdata:/adapt_authoring
     external_links:
       - adaptdb
-    command: node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb --dbName adapt-tenant-master --dbPort 27017 --dataRoot data --sessionSecret your-session-secret --useffmpeg Y --smtpService dummy --smtpUsername smtpUser --smtpPassword smtpPass --fromAddress you@example.com --name master --displayName Master --email ${ADMIN_EMAIL} --password ${ADMIN_PASSWORD} # && node upgrade --Y/n Y
+    command: bash ./install.sh
   upgrade:
     extends:
       service: setup
