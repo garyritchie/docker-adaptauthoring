@@ -1,4 +1,4 @@
-FROM node:4-wheezy
+FROM node:6-wheezy
 
 MAINTAINER Gary Ritchie <gary@garyritchie.com>
 
@@ -23,13 +23,14 @@ RUN cd / \
 
 WORKDIR /adapt_authoring
 
-RUN npm install --production
+RUN npm install --production && grunt build
 
 ## Currently have to run this within container so we can link to running mongodb container...
 COPY install.sh install.sh
 RUN chmod u+x install.sh
 
 # upgrade the AuthoringTool and or Framework
+# RUN pm2 stop all
 # RUN node upgrade --Y/n Y
 
 # guest: 5000, host: 5000
