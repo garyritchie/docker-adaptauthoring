@@ -7,8 +7,8 @@ volumes:
 
 services:
   setup:
-    # build: .
-    image: garyritchie/docker-adaptauthoring:0.2.2
+    #build: .
+    image: pvadimr/adaptauttoring:latest
     container_name: adaptauthoring
     # extends:
     #   file: docker-compose.yml

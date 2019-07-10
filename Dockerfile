@@ -1,12 +1,12 @@
-FROM node:4-wheezy
+FROM node:10-stretch
 
 ENV AAT_VER=0.2.2
 
-MAINTAINER Gary Ritchie <gary@garyritchie.com>
+MAINTAINER Vadim Prishlyak
 
 RUN apt-get update && apt-get install -y \
     build-essential \
-    ffmpeg \
+    ffmpeg libavcodec-dev libavdevice-dev\
     git \
     libssl-dev \
   && rm -rf /var/lib/apt/lists/*
@@ -17,11 +17,13 @@ RUN npm install -g pm2 \
   && npm install -g adapt-cli
 
 RUN cd / \
-  && git clone --branch v${AAT_VER} https://github.com/adaptlearning/adapt_authoring.git
+  && git clone https://github.com/adaptlearning/adapt_authoring.git
 
 WORKDIR /adapt_authoring
 
 RUN npm install --production
+
+RUN npm install
 
 ## Currently have to run this within container so we can link to running mongodb container...
 ## docker run -it -P --link adaptdb --name adapt adaptframework bash
@@ -32,7 +34,7 @@ RUN npm install --production
   # --name master --displayName Master --email admin --password password
 
 # upgrade the AuthoringTool and or Framework
-# RUN node upgrade --Y/n Y
+RUN node upgrade --Y/n Y
 
 # guest: 5000, host: 5000
 # guest: 5858, host: 5858
