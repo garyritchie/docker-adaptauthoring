@@ -3,12 +3,12 @@ version: '2'
 volumes:
   adaptdata:
     external:
-      name: dockeradaptauthoring_adaptdata
+      name: authoring_adaptdata
 
 services:
   setup:
-    #build: .
-    image: pvadimr/adaptauttoring:latest
+    # build: .
+    image: pvadimr/adaptauthoring
     container_name: adaptauthoring
     # extends:
     #   file: docker-compose.yml
