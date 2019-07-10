@@ -23,8 +23,6 @@ WORKDIR /adapt_authoring
 
 RUN npm install --production
 
-RUN npm install
-
 ## Currently have to run this within container so we can link to running mongodb container...
 ## docker run -it -P --link adaptdb --name adapt adaptframework bash
 #RUN node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb \
