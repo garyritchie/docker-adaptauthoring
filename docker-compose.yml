@@ -15,6 +15,7 @@ services:
   authoring:
     container_name: adaptauthoring
     image: pvadimr/adaptauthoring
+    image: ${REGISTRY:-pvadimr/adaptauthoring:${TAG:-latest}
     volumes:
       - adaptdata:/adapt_authoring
     # build: .
