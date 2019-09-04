@@ -7,7 +7,7 @@ MAINTAINER Vadim Prishlyak
 RUN apt-get update && apt-get install -y \
     build-essential \
     ffmpeg libavcodec-dev libavdevice-dev\
-    git \
+    git nfs-common\
     libssl-dev \
   && rm -rf /var/lib/apt/lists/*
 
