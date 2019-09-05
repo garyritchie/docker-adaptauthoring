@@ -25,7 +25,7 @@ RUN npm install --production
 
 ## Currently have to run this within container so we can link to running mongodb container...
 ## docker run -it -P --link adaptdb --name adapt adaptframework bash
-#RUN node install --install Y --serverPort 5000 --serverName localhost --dbHost adaptdb \
+#RUN node install --install Y --serverPort 5000 --serverName localhost --dbHost 127.0.0.1 \
   # --dbName adapt-tenant-master --dbPort 27017 \
   # --dataRoot data --sessionSecret your-session-secret --useffmpeg Y \
   # --smtpService dummy --smtpUsername smtpUser --smtpPassword smtpPass --fromAddress you@example.com \
